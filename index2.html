@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Equipamentos MGM | Fênix Equipamentos</title>
+<link rel="icon" type="image/jpeg" href="icone.jpg">
+<link rel="apple-touch-icon" type="image/jpeg" href="icone.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     RESET & VARIÁVEIS
+     ========================================================= */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg-1: #1B1B1B;
+    --bg-2: #232323;
+    --bg-3: #2D2D2D;
+    --dark: #202020;
+    --card: #262626;
+    --card-light: #2c2c2c;
+    --border: #3a3a3a;
+    --border-soft: #303030;
+
+    --orange: #FF6A00;
+    --orange-light: #FF8A3D;
+    --orange-dim: rgba(255,106,0,.14);
+
+    --white: #FFFFFF;
+    --gray-light: #E5E5E5;
+    --gray: #D6D6D6;
+    --gray-dim: #9a9a9a;
+
+    --font-display: 'Oswald', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: linear-gradient(165deg, var(--bg-1) 0%, var(--bg-2) 45%, var(--bg-3) 100%);
+    background-attachment: fixed;
+    color: var(--gray);
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; }
+
+  /* =========================================================
+     NAVEGAÇÃO (desktop + mobile)
+     ========================================================= */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 6vw;
+    height: 72px;
+    background: rgba(27,27,27,0.92);
+    border-bottom: 1px solid var(--border-soft);
+    backdrop-filter: blur(10px);
+  }
+  .nav-left { display: flex; align-items: center; gap: .75rem; }
+
+  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    overflow: hidden; flex-shrink: 0;
+    box-shadow: 0 0 18px rgba(255,106,0,.45);
+  }
+  .nav-logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .nav-logo-text { font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; letter-spacing: 1.5px; color: var(--white); }
+  .nav-logo-text span { color: var(--orange); font-weight: 500; font-size: 0.68rem; display: block; letter-spacing: 3.5px; margin-top: -2px; }
+
+  .nav-links { display: flex; gap: 1rem; list-style: none; align-items: center; }
+  .nav-links a {
+    color: var(--gray-light); text-decoration: none;
+    font-size: 0.95rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    transition: color .2s; position: relative; padding-bottom: 4px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
+    background: var(--orange); transition: width .25s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--orange); }
+  .nav-links a.active::after { width: 100%; }
+
+  .header-social { display: flex; gap: .85rem; align-items: center; }
+  .header-social a { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; border-radius: 50%; color: var(--gray-light); text-decoration: none; transition: transform .2s, filter .2s; }
+  .header-social a svg { width: 28px; height: 28px; }
+  .header-social a:hover { transform: scale(1.08); filter: drop-shadow(0 4px 12px rgba(0,0,0,.35)); }
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: .3s; }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
+    background: var(--dark); border-bottom: 1px solid var(--border-soft);
+    padding: 1.5rem 6vw; flex-direction: column; gap: 1.3rem;
+    max-height: calc(100vh - 72px); overflow-y: auto;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { color: var(--gray-light); text-decoration: none; font-size: 1rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  /* =========================================================
+     HERO
+     ========================================================= */
+  #hero {
+    min-height: 50vh; display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    padding: 140px 6vw 64px;
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(ellipse 900px 500px at 85% 20%, rgba(255,106,0,.16) 0%, transparent 65%),
+      linear-gradient(120deg, #141414 0%, #1c1c1c 55%, #232323 100%);
+  }
+  #hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: linear-gradient(115deg, rgba(0,0,0,.9) 0%, transparent 62%);
+    -webkit-mask-image: linear-gradient(115deg, rgba(0,0,0,.9) 0%, transparent 62%);
+    pointer-events: none;
+  }
+  #hero::after {
+    content: ''; position: absolute; right: -6%; bottom: -18%; width: 640px; height: 640px;
+    background: radial-gradient(circle, rgba(255,106,0,.14) 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  #hero > * { position: relative; z-index: 1; }
+  .hero-content { display: flex; flex-direction: column; align-items: flex-start; text-align: left; max-width: 900px; }
+  .hero-eyebrow {
+    font-family: var(--font-display); font-size: 0.85rem; letter-spacing: 4.5px;
+    text-transform: uppercase; color: var(--orange-light); margin-bottom: 1.1rem; font-weight: 500;
+    display: flex; align-items: center; gap: .7rem;
+  }
+  .hero-eyebrow::before { content: ''; width: 30px; height: 2px; background: var(--orange); display: inline-block; }
+  .hero-title { font-family: var(--font-display); font-size: clamp(2.2rem, 4.3vw, 3.4rem); font-weight: 700; line-height: 1.08; text-transform: uppercase; color: var(--white); text-shadow: 0 2px 40px rgba(255,106,0,.18); letter-spacing: .3px; }
+  .hero-title em { color: var(--orange); font-style: normal; }
+  .hero-sub { margin-top: 1.4rem; color: var(--gray-light); font-size: 1.1rem; max-width: 640px; line-height: 1.75; }
+  .hero-cta { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: flex-start; align-items: center; }
+
+  /* Botões reutilizáveis */
+  .btn-primary {
+    background: var(--orange); color: white; padding: 1rem 2.4rem; font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; display: inline-block; clip-path: polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px)); transition: background .2s, transform .15s, box-shadow .25s; box-shadow: 0 4px 18px rgba(255,106,0,.3);
+  }
+  .btn-primary:hover { background: var(--orange-light); transform: translateY(-2px); box-shadow: 0 6px 28px rgba(255,106,0,.5); }
+
+  /* =========================================================
+     CABEÇALHOS DE SEÇÃO (compartilhados)
+     ========================================================= */
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    font-weight: 700; text-transform: uppercase; color: var(--white); letter-spacing: .5px;
+  }
+  .section-kicker {
+    font-family: var(--font-display); font-size: .78rem; letter-spacing: 3.5px;
+    text-transform: uppercase; color: var(--orange-light); font-weight: 500; margin-bottom: .6rem;
+    display: flex; align-items: center; gap: .6rem;
+  }
+  .section-kicker::before { content: ''; width: 22px; height: 2px; background: var(--orange); display: inline-block; }
+  .divider { width: 56px; height: 3px; background: var(--orange); margin: .9rem 0 1.6rem; border-radius: 2px; }
+  .section-intro { max-width: 720px; color: var(--gray-dim); font-size: 1rem; line-height: 1.75; margin-bottom: 2.4rem; }
+
+  /* =========================================================
+     CATÁLOGO / CATEGORIAS
+     ========================================================= */
+  .section-products { padding: 80px 6vw 90px; }
+  .products-inner { max-width: 1240px; margin: 0 auto; }
+
+  .munck-products {
+    padding: 38px 6vw 80px;
+    background: #0d0d0d;
+    color: var(--white);
+  }
+
+  .munck-products-wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .munck-header {
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 48px;
+  }
+
+  .munck-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 2.4vw, 2.5rem);
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    color: #ff7a1a;
+    margin: 0;
+    line-height: 1.02;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .munck-header p {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: var(--gray-light);
+    font-weight: 500;
+  }
+
+  .munck-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 0 auto;
+  }
+
+  .munck-card {
+    position: relative;
+    min-height: 250px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    padding: 22px 18px 20px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+    isolation: isolate;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, filter .2s ease, border-color .2s ease;
+  }
+
+  .munck-card:hover,
+  .munck-card:focus-visible,
+  .munck-card:active {
+    transform: translateY(-1px);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.16), 0 8px 18px rgba(255,122,26,0.16);
+    filter: saturate(1.05);
+    outline: none;
+  }
+
+  .munck-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255, 122, 26, 0.82), rgba(255, 122, 26, 0.82));
+    z-index: -1;
+  }
+
+  .munck-card:nth-child(1)::before {
+    animation: mgm-card-pulse 2.8s ease-in-out infinite alternate;
+  }
+
+  @keyframes mgm-card-pulse {
+    from { opacity: .78; }
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .munck-card:nth-child(1)::before { animation: none; }
+  }
+
+  .munck-card:nth-child(1) {
+    background-image: url('eeee.jpg');
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .munck-card:nth-child(2) {
+    background-image: url('metalico.png');
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .munck-card:nth-child(3) {
+    background-image: url('fibra.png');
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .munck-card:nth-child(4) {
+    background-image: url('guincho.png');
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .munck-card:nth-child(5) {
+    background-image: url('usado.jpg');
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .munck-card:nth-child(6) {
+    background-image: url('ferramenta.png');
+    background-position: center center;
+    background-size: cover;
+  }
+
+  .munck-card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    min-height: 100%;
+    padding-top: 72px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .munck-card h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 1.9vw, 2.2rem);
+    line-height: 1.08;
+    margin: 0 0 10px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.035em;
+    font-weight: 700;
+    max-width: 100%;
+    transform: translateY(10px);
+  }
+
+  .munck-card p {
+    margin: 0;
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.92);
+    line-height: 1.4;
+    max-width: 92%;
+    transform: translateY(8px);
+  }
+
+  .munck-linha {
+    margin-top: 54px;
+    text-align: center;
+  }
+
+  .munck-linha h2 {
+    font-family: var(--font-display);
+    color: #ff7a1a;
+    text-transform: uppercase;
+    font-size: clamp(2.1rem, 2.8vw, 3rem);
+    letter-spacing: 0.08em;
+    margin: 0;
+    line-height: 1.15;
+  }
+
+  .munck-linha p {
+    margin: 18px auto 26px;
+    font-size: 1.08rem;
+    color: rgba(255, 122, 26, 0.8);
+  }
+
+  .munck-linha .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 260px;
+    padding: 1.08rem 1.6rem;
+    background: #ff7a1a;
+    box-shadow: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    border-radius: 0;
+  }
+
+  .munck-linha .btn-primary:hover {
+    background: #ff8a3d;
+  }
+
+  @media (max-width: 980px) {
+    .munck-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 620px) {
+    .munck-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .munck-card {
+      min-height: 220px;
+    }
+
+    .munck-header h2,
+    .munck-linha h2 {
+      letter-spacing: 0.04em;
+    }
+  }
+
+  .category-panel { margin-top: 2rem; }
+  .category-list { list-style: none; display: grid; gap: 1rem; }
+
+  .category-list a {
+    display: block; width: 100%; padding: 1.4rem 1.6rem; border: 1px solid rgba(255,106,0,.18);
+    border-radius: 14px; background: rgba(255,106,0,.04); color: var(--white); text-decoration: none;
+    font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; letter-spacing: .8px;
+    text-transform: uppercase; transition: background .2s, transform .2s, border-color .2s;
+  }
+  .category-list a:hover {
+    background: rgba(255,106,0,.14); border-color: var(--orange); transform: translateY(-1px);
+    color: var(--orange);
+  }
+  .category-list a:active { transform: translateY(0); }
+
+  .category-toggle {
+    display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 1.4rem 1.6rem;
+    border: 1px solid rgba(255,106,0,.18); border-radius: 14px; background: rgba(255,106,0,.04);
+    color: var(--white); text-transform: uppercase; letter-spacing: .8px; font-family: var(--font-display);
+    font-size: 1.15rem; font-weight: 700; cursor: pointer; transition: background .2s, transform .2s, border-color .2s, color .2s;
+  }
+  .category-toggle:hover {
+    background: rgba(255,106,0,.14); border-color: var(--orange); color: var(--orange); transform: translateY(-1px);
+  }
+  .category-toggle-arrow { color: var(--orange); font-size: .95rem; line-height: 1; }
+  .category-toggle.open { background: rgba(255,106,0,.14); border-color: var(--orange); }
+
+  /* Modelo sem expansão: lista estática de produtos */
+  .product-folder {
+    display: block; margin-top: 1.5rem; border-radius: 18px; background: rgba(255,106,0,.04); border: 1px solid rgba(255,106,0,.18); padding: 1.8rem;
+  }
+  .product-folder-header { position: relative; display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; }
+  .product-folder-header h3 { font-family: var(--font-display); font-size: 1.35rem; text-transform: uppercase; letter-spacing: .9px; color: var(--white); margin: 0; }
+  .product-folder-header span { color: var(--orange); font-size: .95rem; letter-spacing: .2em; }
+
+  .product-folder-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.95rem; }
+  .product-folder-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    width: 100%; padding: 1rem 1.25rem; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+    cursor: pointer; text-decoration: none; transition: background .2s, border-color .2s, transform .2s;
+  }
+  .product-folder-item:hover { background: rgba(255,106,0,.08); border-color: rgba(255,106,0,.25); transform: translateY(-1px); }
+  .product-folder-item strong { color: var(--gray-light); font-size: 0.98rem; text-transform: uppercase; letter-spacing: .7px; }
+  .product-folder-item.selected { background: rgba(255,106,0,.12); border-color: rgba(255,106,0,.28); }
+  .product-folder-item.selected strong { color: var(--orange); }
+
+  /* Compensa o header fixo ao rolar até âncoras */
+  section[id], .product-folder, .category-list li[id] { scroll-margin-top: 92px; }
+
+  /* Selo "sugestão" exibido brevemente ao abrir a categoria MGM */
+  .suggest-badge {
+    position: absolute; right: 0; top: -10px; transform: translateY(-50%);
+    background: linear-gradient(90deg,var(--orange),var(--orange-light)); color: white;
+    padding: .45rem .8rem; border-radius: 999px; font-size: .78rem; font-weight: 700;
+    box-shadow: 0 8px 24px rgba(255,106,0,.12); animation: pf-pulse 1.6s ease-in-out 1;
+  }
+  @keyframes pf-pulse {
+    0% { transform: translateY(-50%) scale(.95); opacity: 0; }
+    20% { opacity: 1; transform: translateY(-50%) scale(1.03); }
+    70% { transform: translateY(-50%) scale(1); opacity: 1; }
+    100% { opacity: 0; transform: translateY(-50%) scale(1); }
+  }
+
+  /* =========================================================
+     SEGUROS
+     ========================================================= */
+  #seguros { padding: 70px 6vw; background: rgba(0,0,0,.14); border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); }
+  #seguros .inner { max-width: 1240px; margin: 0 auto; }
+  #seguros p { max-width: 900px; color: var(--gray-light); line-height: 1.8; font-size: 1.05rem; }
+
+  /* =========================================================
+     WHATSAPP FLUTUANTE
+     ========================================================= */
+  .whatsapp-float {
+    position: fixed; right: 1.5rem; bottom: 1.5rem; width: 58px; height: 58px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: #25d366; color: #fff; text-decoration: none;
+    box-shadow: 0 20px 40px rgba(0,0,0,.24); z-index: 150;
+    transition: transform .2s, box-shadow .2s, background .2s;
+  }
+  .whatsapp-float:hover { transform: translateY(-2px); box-shadow: 0 24px 46px rgba(0,0,0,.3); background: #22c25a; }
+  .whatsapp-float svg { width: 26px; height: 26px; }
+
+  /* =========================================================
+     RODAPÉ
+     ========================================================= */
+  footer { padding: 2.4rem 6vw; text-align: center; color: var(--gray-dim); font-size: .85rem; border-top: 1px solid var(--border-soft); }
+  footer strong { color: var(--gray-light); }
+  .standard-footer { background: linear-gradient(145deg,#0b0c0d 0%,#141517 100%); border-top: 3px solid var(--orange); padding: 58px 6vw 20px; color: var(--gray-light); text-align: left; }
+  .standard-footer .footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 24px 42px; display: grid; grid-template-columns: 1.35fr 1fr 1fr 1.2fr; gap: 42px; }
+  .standard-footer .footer-brand-name,.standard-footer .footer-brand-subtitle { display: inline; color: #fff; font-family: var(--font-head); font-size: 27px; font-weight: 800; letter-spacing: 1px; line-height: 1; }
+  .standard-footer .footer-brand-subtitle { margin-left: 8px; }
+  .standard-footer .footer-brand p { color: var(--text-1); font-size: 14px; line-height: 1.7; margin: 18px 0 0; max-width: 250px; }
+  .standard-footer .footer-col h4 { color: var(--orange); margin: 0 0 18px; font-family: var(--font-head); font-size: 15px; text-transform: uppercase; }
+  .standard-footer .footer-col a { display: block; color: var(--text-1); text-decoration: none; margin-bottom: 12px; }
+  .standard-footer .footer-col a:hover { color: var(--orange); }
+  .standard-footer .footer-contact-link a { color: var(--text-0); font-weight: 600; }
+  .standard-footer .social-links { display: flex; flex-direction: column; gap: 10px; }
+  .standard-footer .social-button { display: inline-flex; align-items: center; gap: 10px; width: 100%; max-width: 190px; padding: 10px 13px; border: 1px solid var(--border); border-radius: 5px; color: var(--text-1); text-decoration: none; }
+  .standard-footer .footer-col a.social-button { display: inline-flex; align-items: center; }
+  .standard-footer .social-button svg { width: 24px; height: 24px; flex-shrink: 0; }
+  .standard-footer .instagram-button:hover { border-color: #d62976; }
+  .standard-footer .facebook-button:hover { border-color: #1877f2; }
+  .standard-footer .footer-bottom { border-top: 1px solid var(--border); max-width: 1280px; margin: 0 auto; padding-top: 20px; text-align: center; color: var(--text-2); font-size: 12.5px; }
+  @media (max-width: 900px) { .standard-footer .footer-inner { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px) { .standard-footer .footer-inner { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* =========================================================
+     RESPONSIVO
+     ========================================================= */
+  @media (max-width: 900px) {
+    .category-list a,
+    .category-toggle { font-size: 1.05rem; padding: 1.2rem 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">
+        <img src="icone.jpg" alt="Logo Fênix Equipamentos">
+      </div>
+      <div class="nav-logo-text">FÊNIX<span>EQUIPAMENTOS</span></div>
+    </a>
+    <div class="header-social">
+      <a href="https://www.instagram.com/fenix_equipamentos2011/" target="_blank" rel="noopener noreferrer" class="instagram" title="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="instagramGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#feda75" />
+              <stop offset="25%" stop-color="#fa7e1e" />
+              <stop offset="50%" stop-color="#d62976" />
+              <stop offset="75%" stop-color="#962fbf" />
+              <stop offset="100%" stop-color="#4f5bd5" />
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="24" height="24" rx="6" fill="url(#instagramGradNav)" />
+          <rect x="4.2" y="4.2" width="15.6" height="15.6" rx="4" fill="none" stroke="#fff" stroke-width="1.9" />
+          <circle cx="12" cy="12" r="3.8" fill="none" stroke="#fff" stroke-width="1.9" />
+          <circle cx="16.4" cy="7.6" r="1.2" fill="#fff" />
+        </svg>
+      </a>
+      <a href="https://www.facebook.com/Elisonfenix" target="_blank" rel="noopener noreferrer" class="facebook" title="Facebook">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="facebookGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1877F2" />
+              <stop offset="100%" stop-color="#0A66C2" />
+            </linearGradient>
+          </defs>
+          <rect width="24" height="24" rx="6" fill="url(#facebookGradNav)" />
+          <path d="M15.5 8.5h-1.5c-.75 0-1 .35-1 1v1.5h2.5l-.35 2.5H13v7h-2.5v-7H8.5V11.5H10.5V9.5c0-2 1.2-3.5 3.5-3.5h1.5V8.5z" fill="#fff" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Início</a></li>
+    <li><a href="pag_eqMGM.html">Equipamentos MGM</a></li>
+    <li><a href="produtos.html?categoria=cesto-metalico">Cesto Metálico</a></li>
+    <li><a href="produtos.html?categoria=cesto-aereo">Cesto Aéreo</a></li>
+    <li><a href="produtos.html?categoria=guincho">Guincho de Cabo</a></li>
+    <li><a href="https://wa.me/message/3GLJSVNEHOJFK1" target="_blank" rel="noopener noreferrer">Contato</a></li>
+  </ul>
+
+  <div class="hamburger" onclick="toggleMenu()" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="pag_eqMGM.html" onclick="closeMenu()">Equipamentos MGM</a>
+  <a href="produtos.html?categoria=cesto-metalico" onclick="closeMenu()">Cesto Metálico</a>
+  <a href="produtos.html?categoria=cesto-aereo" onclick="closeMenu()">Cesto Aéreo</a>
+  <a href="produtos.html?categoria=guincho" onclick="closeMenu()">Guincho de Cabo</a>
+  <a href="https://wa.me/message/3GLJSVNEHOJFK1" target="_blank" rel="noopener noreferrer" onclick="closeMenu()">Fale Conosco</a>
+  <a href="index.html" class="btn-primary" style="display: inline-flex; justify-content: center;" onclick="closeMenu()">Voltar à Tela Inicial</a>
+</div>
+
+<!-- ============ PRODUTOS MUNCK ============ -->
+<section id="catalogo" class="munck-products">
+  <div class="munck-products-wrap">
+    <div class="munck-header">
+      <h2>NOSSOS PRODUTOS</h2>
+      <p>Qualidade e desempenho para cada operação.</p>
+    </div>
+
+    <div class="munck-grid">
+      <a href="pag_eqMGM.html" class="munck-card" aria-label="Abrir Equipamentos MGM">
+        <div class="munck-card-content">
+          <h3>Equipamentos MGM</h3>
+          <p>Equipamentos de alta qualidade para diversas aplicações</p>
+        </div>
+      </a>
+
+      <a href="produtos.html?categoria=cesto-metalico" class="munck-card" aria-label="Cesto Metálico">
+        <div class="munck-card-content">
+          <h3>Cesto Metálico</h3>
+          <p>Cestos Metálicos para transporte e manipulação de materiais</p>
+        </div>
+      </a>
+
+      <a href="produtos.html?categoria=cesto-aereo" class="munck-card" aria-label="Cesto Aéreo">
+        <div class="munck-card-content">
+          <h3>Cesto Aéreo</h3>
+          <p>Cestos de Fibra para transporte</p>
+        </div>
+      </a>
+
+      <a href="produtos.html?categoria=guincho" class="munck-card" aria-label="Guincho de Cabo">
+        <div class="munck-card-content">
+          <h3>Guincho de Cabo</h3>
+          <p>Guinchos de Cabo para transporte e manipulação de cargas</p>
+        </div>
+      </a>
+
+      <a href="produtos.html" class="munck-card" aria-label="Acessórios">
+        <div class="munck-card-content">
+          <h3>Acessórios</h3>
+          <p>Acessórios para manutenção e operação de equipamentos</p>
+        </div>
+      </a>
+
+      <a href="achadinho.html" class="munck-card" aria-label="Ferramentas">
+        <div class="munck-card-content">
+          <h3>Ferramentas</h3>
+          <p>Ferramentas para manutenção e operação de equipamentos</p>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ SEGUROS ============ -->
+<section id="seguros">
+  <div class="inner">
+    <div class="section-kicker">Proteção</div>
+    <h2 class="section-title">Seguros</h2>
+    <div class="divider"></div>
+    <p>Oferecemos seguros para caminhões, guindastes e equipamentos, com cobertura contra roubo, furto, colisão, incêndio e outros imprevistos. Trabalhamos com as principais seguradoras do país, oferecendo atendimento nacional, contratação ágil, condições facilitadas, parcelamentos e garantindo mais segurança para o seu patrimônio.</p>
+  </div>
+</section>
+
+<a href="https://wa.me/message/3GLJSVNEHOJFK1" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.672.15-.198.297-.768.967-.942 1.164-.173.198-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.173.198-.298.298-.496.099-.198.05-.372-.025-.52-.075-.149-.672-1.611-.921-2.206-.242-.579-.487-.5-.672-.51-.173-.007-.372-.009-.571-.009-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.26.489 1.69.626.71.227 1.357.195 1.87.118.57-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.273-.198-.57-.347z"/><path d="M12.004 2.003C6.477 2.003 2 6.48 2 12.004c0 1.989.517 3.864 1.498 5.52L2 22l4.613-1.49A9.981 9.981 0 0012.004 22c5.527 0 10.004-4.477 10.004-9.996C22.008 6.48 17.531 2.003 12.004 2.003zm0 18.204c-1.832 0-3.543-.492-5.038-1.345l-.36-.21-2.74.887.92-2.676-.235-.36A7.921 7.921 0 014.004 12c0-4.411 3.59-8.005 8.004-8.005 4.417 0 8.004 3.595 8.004 8.005 0 4.41-3.587 8.002-8.004 8.002z"/></svg>
+</a>
+
+<footer style="display: none;">
+  <div style="max-width: 1240px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+      <div>
+        <h3 style="color: var(--orange); font-size: 0.9rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem;">Produtos</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem;">
+          <li><a href="equipamentos-mgm.html" style="color: var(--gray-light); text-decoration: none; font-size: 0.95rem; transition: color .2s;">Equipamentos MGM</a></li>
+          <li><a href="index2.html" style="color: var(--gray-light); text-decoration: none; font-size: 0.95rem; transition: color .2s;">Cestos Aéreos</a></li>
+          <li><a href="index2.html" style="color: var(--gray-light); text-decoration: none; font-size: 0.95rem; transition: color .2s;">Ferramentas e Acessórios</a></li>
+          <li><a href="seguros-munck.html" style="color: var(--gray-light); text-decoration: none; font-size: 0.95rem; transition: color .2s;">Seguros Munck</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="color: var(--orange); font-size: 0.9rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem;">Institucional</h3>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem;">
+          <li><a href="index.html#quem-somos" style="color: var(--gray-light); text-decoration: none; font-size: 0.95rem; transition: color .2s;">Sobre Nós</a></li>
+          <li><a href="https://wa.me/message/3GLJSVNEHOJFK1" target="_blank" rel="noopener noreferrer" style="color: var(--gray-light); text-decoration: none; font-size: 0.95rem; transition: color .2s;">Nossos Contatos</a></li>
+          <li><a href="https://wa.me/message/3GLJSVNEHOJFK1" target="_blank" style="color: var(--orange); text-decoration: none; font-size: 0.95rem; font-weight: 600; transition: color .2s;">Para Mais Informações</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="color: var(--orange); font-size: 0.9rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 1.5rem;">Fênix Redes Sociais</h3>
+        <p style="font-size: 0.9rem; line-height: 1.6; margin: 0; color: #bbb;">Proporcionamos soluções e garantia para que você possa ampliar e continuar seus negócios com segurança e confiabilidade.</p>
+        <div style="margin-top: 1.5rem; display: flex; flex-direction: column; align-items: flex-start; text-align: left;">
+          <h4 style="color: var(--orange); font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem;">Fique por Dentro:</h4>
+          <div style="display: flex; gap: 1rem; align-items: center; justify-content: flex-start;">
+            <a href="https://www.facebook.com/Elisonfenix" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: #333; color: white; text-decoration: none; transition: background .2s;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5c-.476-.063-2.087-.2-3.623-.2-3.68 0-6.374 2.243-6.374 6.365v1.535z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/fenix_equipamentos2011/" target="_blank" style="display: inline-flex; align-items: center; justify-content: center; width: 42px; height: 42px; border-radius: 50%; background: #333; color: white; text-decoration: none; transition: background .2s;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.266.069 1.646.069 4.85 0 3.204-.012 3.584-.07 4.85-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1 1 12.324 0 6.162 6.162 0 0 1-12.324 0zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm4.965-10.322a1.44 1.44 0 1 1 2.881.001 1.44 1.44 0 0 1-2.881-.001z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top: 1px solid #333; padding-top: 2rem; margin-top: 2rem; text-align: center;">
+      <p style="margin: 0; font-size: 0.9rem; color: #666;">Fênix Equipamentos — Representante MGM Equipamentos</p>
+      <p style="margin: 0.5rem 0 0; font-size: 0.85rem; color: #555;">© 2026 Fênix Equipamentos. Todos os direitos reservados.</p>
+      <p style="margin: 0.45rem 0 0; font-size: 0.72rem; color: #7d7d7d;">Desenvolvedora Web: Amanda Melo • (21) 9 6905-4367</p>
+    </div>
+  </div>
+</footer>
+
+<footer class="site-footer standard-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="footer-brand-name">FÊNIX</span>
+      <span class="footer-brand-subtitle">EQUIPAMENTOS</span>
+      <p>Ferramentas e acessórios para quem trabalha pesado.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <a href="index.html#hero">Início</a>
+      <a href="index.html#quem-somos">Quem Somos</a>
+      <a href="achadinho.html#produtos">Produtos</a>
+    </div>
+    <div class="footer-col footer-contact-link">
+      <h4>CONTATO</h4>
+      <a href="index.html#fale-conosco">Entrar em contato</a>
+    </div>
+    <div class="footer-col">
+      <h4>Redes sociais</h4>
+      <div class="social-links">
+        <a class="social-button instagram-button" href="https://www.instagram.com/fenix_equipamentos2011/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="instagramFooterGradientIndex2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#feda75"/><stop offset="50%" stop-color="#d62976"/><stop offset="100%" stop-color="#962fbf"/></linearGradient></defs><rect width="24" height="24" rx="6" fill="url(#instagramFooterGradientIndex2)"/><rect x="4.2" y="4.2" width="15.6" height="15.6" rx="4" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="12" cy="12" r="3.8" fill="none" stroke="#fff" stroke-width="1.9"/><circle cx="16.4" cy="7.6" r="1.2" fill="#fff"/></svg><span>Instagram</span></a>
+        <a class="social-button facebook-button" href="https://www.facebook.com/Elisonfenix" target="_blank" rel="noopener noreferrer" aria-label="Abrir Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="6" fill="#1877f2"/><path d="M15.5 8.5h-1.5c-.75 0-1 .35-1 1v1.5h2.5l-.35 2.5H13v7h-2.5v-7H8.5V11.5H10.5V9.5c0-2 1.2-3.5 3.5-3.5h1.5V8.5z" fill="#fff"/></svg><span>Facebook</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 Fênix Equipamentos. Todos os direitos reservados.</span><p style="margin: 0.45rem 0 0; font-size: 0.72rem; color: #9a9a9a; letter-spacing: 0.02em;">Desenvolvedora Web: Amanda Melo • (21) 9 6905-4367</p></div>
+</footer>
+
+<script>
+  /* ---------- Menu mobile ---------- */
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  function closeMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+  function scrollToCatalog() {
+    const nav = document.querySelector('nav');
+    const target = document.getElementById('catalogo');
+    if (!target) return;
+
+    const navHeight = nav ? nav.offsetHeight : 72;
+    const y = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 12;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  /* ---------- Rolagem suave dos links do menu + destaque da categoria ---------- */
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const href = a.getAttribute('href') || '';
+      if (!href.startsWith('#')) return;
+      e.preventDefault();
+      scrollToCatalog();
+
+      const mobile = document.getElementById('mobileMenu');
+      if (mobile && mobile.classList.contains('open')) mobile.classList.remove('open');
+    });
+  });
+
+  document.querySelectorAll('.mobile-menu a[href="#catalogo"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      scrollToCatalog();
+    });
+  });
+</script>
+
+</body>
+</html>
